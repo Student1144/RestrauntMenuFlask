@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1 class="mt-4 mb-4">Our Delicious Menu</h1>
+{% for meal in meals %}
+    <h2> {{ meal.1 }}</h2>
+    {% for row in item_list %}
+        {% if row.meal_type == meal.0 %}
+            {% if row.status == 0 %}
+                <a href="{% url 'menu_item' row.pk %}"><h3><s>{{ row.meal }}</s></h3></a>
+                <p>{{ row.description }}</p>
+            {% else %}
+                <a href="{% url 'menu_item' row.pk %}"><h3>{{ row.meal }}</h3></a>
+                <p>{{ row.description }}</p>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+{% endfor %}
+
+{% endblock %}
